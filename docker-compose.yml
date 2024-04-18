@@ -7,9 +7,9 @@ services:
       - 5000:5000
     environment:
       MYSQL_HOST: mysql
-      MYSQL_USER: subha
-      MYSQL_PASSWORD: subha
-      MYSQL_DB: two-tier
+      MYSQL_USER: default_user
+      MYSQL_PASSWORD: default_password
+      MYSQL_DB: messageDB
     depends_on:
       - mysql
  
@@ -17,9 +17,9 @@ services:
     image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD:  test@123
-      MYSQL_USER: subha
-      MYSQL_PASSWORD: subha
-      MYSQL_DATABASE: two-tier
+      MYSQL_USER: default_user
+      MYSQL_PASSWORD: default_password
+      MYSQL_DATABASE: messageDB
     volumes:
       - my-datavolume:/var/lib/mysql
 volumes:
