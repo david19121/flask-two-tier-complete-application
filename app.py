@@ -1,21 +1,27 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for
-#from flask_mysqldb import MySQL
-#from flaskext.mysql import MySQL
 
-from flask_mysqldb import MySQL
-import yaml
+
+
+import mysql.connector as mysql
+
+
+
+
+connection=mysql.connector.connect(hosts='mysql',port='3306',database='messageDB',user='root',passord='Wisdom12345$$')
+curor=connection.cursor()
 
 app = Flask(__name__)
 
-# Configure MySQL from environment variables
-app.config['MYSQL_HOST'] = os.environ.get('MYSQL_HOST', 'localhost')
-app.config['MYSQL_USER'] = os.environ.get('MYSQL_USER', 'default_user')
-app.config['MYSQL_PASSWORD'] = os.environ.get('MYSQL_PASSWORD', 'default_password')
-app.config['MYSQL_DB'] = os.environ.get('MYSQL_DB', 'default_db')
 
-# Initialize MySQL
-mysql = MySQL(app)
+app.secret_key = 'xyzsdfg'
+  
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'user-system'
+  
+mysql = mysql(app)
 
 # Create 'messages' table if it doesn't exist
 with app.app_context():
@@ -28,7 +34,7 @@ with app.app_context():
     ''')
     mysql.connection.commit()
     cur.close()
-
+print("starting application")
 @app.route('/')
 def hello():
     cur = mysql.connection.cursor()
